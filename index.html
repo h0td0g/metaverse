@@ -3,10 +3,14 @@
   <head>
     <meta charset="utf-8">
     <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
+
     <script src="https://rawgit.com/ngokevin/aframe-firebase-component/master/dist/aframe-firebase-component.min.js"></script>
-    <script src="https://rawgit.com/ngokevin/kframe/master/components/firebase/examples/basic/components/follow.js"></script>
-    <script src="https://rawgit.com/ngokevin/kframe/master/components/firebase/examples/basic/components/random-position.js"></script>
-    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v2.5.3/dist/aframe-extras.min.js"></script>
+    <script src="https://rawgit.com/bryik/aframe-bmfont-text-component/master/dist/aframe-bmfont-text-component.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v2.5.3/dist/aframe-extras.min.js"></script> <!-- (universal-controls) -->
+
+    <script src="components/follow.js"></script>
+    <script src="components/randomPosition.js"></script>
+    <script src="components/randomPlayerComponents.js"></script>
   </head>
   <body>
     <a-scene firebase="apiKey: AIzaSyCrY9aRYz0UKs3E8ZhtycJURpE0sVFDT2o;
@@ -18,8 +22,7 @@
                 geometry="primitive: box; depth: 0.3; height: 0.3; width: 0.3"
                 material="color: #222"></a-mixin>
         <a-mixin id="avatar-body"
-                 geometry="primitive: cone; height: 1.5; radiusTop: 0.1; radiusBottom: 0.4"
-                 material="color: #222"></a-mixin>
+                 geometry="primitive: cone; height: 1.6; radiusTop: 0.1; radiusBottom: 0.4"></a-mixin>
       </a-assets>
 
       <!-- Synced avatar head. Rotates separately from body. -->
@@ -32,8 +35,16 @@
       <!-- Synced avatar body. -->
       <a-entity id="body" firebase-broadcast="components: position" follow="[camera]">
         <a-entity mixin="avatar-body"
-                  firebase-broadcast="componentsOnce: mixin; components: position"
-                  position="0 -1 0"></a-entity>
+                  firebase-broadcast="componentsOnce: mixin;
+                                      components: position, material"
+                  position="0 -1 0"
+                  random-color></a-entity>
+      </a-entity>
+
+      <a-entity id="text" firebase-broadcast="components: position" follow="[camera]">
+        <a-entity firebase-broadcast="components: position, bmfont-text"
+                  position="-0.5 0.5 0"
+                  random-player-id="color: white;"></a-entity>
       </a-entity>
 
       <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
