@@ -1,0 +1,24 @@
+body[data-vr="true"] .novr {
+  display: none;
+}
+
+#chatWidget {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: white;
+  opacity: 0.5;
+  padding: 2px;
+}
+
+#chatWidget #chatMessages {
+  height: 100px;
+  width: 400px;
+  overflow-y: scroll;
+  margin-bottom: 2px;
+}
+
+#chatWidget #chatInput {
+  visibility: hidden;
+  width: 98%;
+}

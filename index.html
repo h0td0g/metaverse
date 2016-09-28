@@ -2,6 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
 
     <script src="https://rawgit.com/ngokevin/aframe-firebase-component/master/dist/aframe-firebase-component.min.js"></script>
@@ -10,13 +12,16 @@
 
     <script src="components/follow.js"></script>
     <script src="components/randomPosition.js"></script>
-    <script src="components/randomPlayerComponents.js"></script>
+    <script src="components/player.js"></script>
+
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <a-scene firebase="apiKey: AIzaSyCrY9aRYz0UKs3E8ZhtycJURpE0sVFDT2o;
                        authDomain: metaverse-96f6f.firebaseapp.com;
                        databaseURL: https://metaverse-96f6f.firebaseio.com;
-                       storageBucket: metaverse-96f6f.appspot.com">
+                       storageBucket: metaverse-96f6f.appspot.com"
+             chat>
       <a-assets>
         <a-mixin id="avatar-head"
                 geometry="primitive: box; depth: 0.3; height: 0.3; width: 0.3"
@@ -26,14 +31,14 @@
       </a-assets>
 
       <!-- Synced avatar head. Rotates separately from body. -->
-      <a-entity id="head" mixin="avatar-head"
+      <a-entity id="player" mixin="avatar-head"
                 camera universal-controls
                 random-position="min: -10 1.7 -10; max: 10 1.9 10"
                 firebase-broadcast="componentsOnce: mixin;
                                     components: position, rotation"></a-entity>
 
       <!-- Synced avatar body. -->
-      <a-entity id="body" firebase-broadcast="components: position" follow="[camera]">
+      <a-entity id="player-body" firebase-broadcast="components: position" follow="[camera]">
         <a-entity mixin="avatar-body"
                   firebase-broadcast="componentsOnce: mixin;
                                       components: position, material"
@@ -41,7 +46,7 @@
                   random-color></a-entity>
       </a-entity>
 
-      <a-entity id="text" firebase-broadcast="components: position" follow="[camera]">
+      <a-entity id="player-text" firebase-broadcast="components: position" follow="[camera]">
         <a-entity firebase-broadcast="components: position, bmfont-text"
                   position="-0.5 0.5 0"
                   random-player-id="color: white;"></a-entity>
@@ -53,5 +58,10 @@
       <a-plane position="0 0 -4" rotation="-90 0 0" width="20" height="20" color="#7BC8A4"></a-plane>
       <a-sky color="#ECECEC"></a-sky>
     </a-scene>
+
+    <div id="chatWidget" class="novr">
+      <div id="chatMessages"></div>
+      <input id="chatInput" type="text" />
+    </div>
   </body>
 </html>
