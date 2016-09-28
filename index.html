@@ -9,6 +9,7 @@
     <script src="https://rawgit.com/ngokevin/aframe-firebase-component/master/dist/aframe-firebase-component.min.js"></script>
     <script src="https://rawgit.com/bryik/aframe-bmfont-text-component/master/dist/aframe-bmfont-text-component.js"></script>
     <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v2.5.3/dist/aframe-extras.min.js"></script> <!-- (universal-controls) -->
+    <script src="https://rawgit.com/gasolin/aframe-href-component/master/index.js"></script>
 
     <script src="components/follow.js"></script>
     <script src="components/randomPosition.js"></script>
@@ -35,7 +36,9 @@
                 camera universal-controls
                 random-position="min: -10 1.7 -10; max: 10 1.9 10"
                 firebase-broadcast="componentsOnce: mixin;
-                                    components: position, rotation"></a-entity>
+                                    components: position, rotation">
+        <a-cursor color="#4CC3D9"></a-cursor>
+      </a-entity>
 
       <!-- Synced avatar body. -->
       <a-entity id="player-body" firebase-broadcast="components: position" follow="[camera]">
@@ -52,7 +55,8 @@
                   random-player-id="color: white;"></a-entity>
       </a-entity>
 
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"
+             href="https://ngokevin.github.io/aframe-magicavoxel-projects/city/"></a-box>
       <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
       <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
       <a-plane position="0 0 -4" rotation="-90 0 0" width="20" height="20" color="#7BC8A4"></a-plane>

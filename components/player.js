@@ -1,4 +1,5 @@
-var playerName;
+var playerName;  // Store playerName as a global because otherwise in some
+                 // circumstances (e.g. on page unload), we can't access it.
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -64,7 +65,7 @@ AFRAME.registerComponent('chat', {
           $('#chatInput').val('');
           setTimeout(function () {
             firebase.database.child('chat').push({
-              'player': $('player-text')[0].getAttribute('bmfont-text')['text'],
+              'player': playerName,
               'text': text,
               'time': Date.now()
             });
@@ -100,8 +101,17 @@ AFRAME.registerComponent('chat', {
       .on('child_added', function (msg) {
         msgs.push(msg.val());
 
+        msgTexts = msgs.sort(function(a, b) {
+                         // Sort by time, ascending.
+                         var x = a.time; var y = b.time;
+                         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                       })
+                       .slice(-5)
+                       .map(function (m) { return m['player'] + ": " + m['text']; })
+                       .join('<br>');
+
         $('#chatMessages')
-          .html(msgs.slice(-5).map(function (m) { return m['player'] + ": " + m['text']; }).join('<br>'))
+          .html(msgTexts)
           .scrollTop($('#chatMessages')[0].scrollHeight);
 
         $('#chatWidget').show();
