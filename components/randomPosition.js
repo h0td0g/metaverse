@@ -1,4 +1,4 @@
-// https://rawgit.com/ngokevin/kframe/master/components/firebase/examples/basic/components/random-position.js
+// https://cdn.jsdelivr.net/gh/ngokevin/kframe@master/components/firebase/examples/basic/components/random-position.js
 /**
  * Set random position within bounds.
  */

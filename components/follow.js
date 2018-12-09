@@ -1,4 +1,4 @@
-// https://rawgit.com/ngokevin/kframe/master/components/firebase/examples/basic/components/follow.js
+// https://cdn.jsdelivr.net/gh/ngokevin/kframe@master/components/firebase/examples/basic/components/follow.js
 AFRAME.registerComponent('follow', {
   schema: {type: 'selector'},
 
